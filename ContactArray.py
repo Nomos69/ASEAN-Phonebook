@@ -1,6 +1,6 @@
 # Array List implementation of Contacts
 from Contact import Contact
-
+#Sample comment
 class ContactList:
     """Contact List class that creates an array list of the phonebook.
     """
