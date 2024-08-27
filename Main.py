@@ -131,5 +131,4 @@ if __name__ == "__main__":
         showMenu("main")
         opt = int(input("Select Operation: "))
         # Complete your code here
-        if opt == 1:
-            Contact
+        
