@@ -1,4 +1,4 @@
-# Main Python File to run from tite
+# Main Python File to run from tite pogi
 from ContactArray import ContactList
 from Contact import Contact
 
