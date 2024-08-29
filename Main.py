@@ -1,4 +1,4 @@
-# Main Python File to run from test 
+# Main Python File to run from
 from ContactArray import ContactList
 from Contact import Contact
 
