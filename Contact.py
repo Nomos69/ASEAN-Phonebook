@@ -97,6 +97,7 @@ class Contact:
         return "His" if self.getGender() == "M" else "Her"
     
     def getCountryCode(self) -> str:
+
         """Gets the string value of the contact's country code.
         This refers to the different countries and their respective 
         country codes
@@ -137,9 +138,7 @@ class Contact:
             str: Full contact number, including numeric country code, 
             area code, and contact number.
         """
-        return "{}-{}-{}".format(self.getNumericCountryCode(),
-                                self.getAreaCode(),
-                                self.getContactNumber())
+        return "{}-{}-{}".format(self.getNumericCountryCode(),self.getAreaCode(),self.getContactNumber())
     
     def get(self, attr: str) -> any:
         """
@@ -150,7 +149,23 @@ class Contact:
                 attr (str): Attribute of this object to retrieve from.
         """
         # Optionally complete this method for up to 2 additional points in your MTE.
-        return -1
+
+        attributes = {
+        "student_num": self.student_num,
+        "fname": self.fname,
+        "lname": self.lname,
+        "occupation": self.occupation,
+        "gender": self.gender,
+        "cc": self.cc,
+        "area": self.area,
+        "number": self.number
+    }
+    
+        if attr in attributes:
+            return attributes[attr]
+        else:
+            print(f"Sorry, attribute '{attr}' does not exist.")
+        return None
         
     def setStudentNumber(self, new_stdn: str) -> None:
         """Sets a new student number of this contact.
@@ -240,8 +255,20 @@ class Contact:
             -1 if name value of c1 < c2.
         """
         # Complete this method
-        return -1
-    
+        if comparison_type == 0:  # Compare last names
+            lname1 = c1.getLName().lower()
+            lname2 = c2.getLName().lower()
+        else:  # Compare first names
+            lname1 = c1.getFName().lower()
+            lname2 = c2.getFName().lower()
+
+        if lname1 > lname2:
+            return 1
+        elif lname1 == lname2:
+            return 0
+        else:
+            return -1
+          
     @staticmethod
     def compare(c1: 'Contact', c2: 'Contact', modifier: str) -> int:
         """
@@ -257,9 +284,42 @@ class Contact:
         """
         # Optionally complete (and only utilize this method instead of the compareNames() method)
         # in comparing attribute values (used in completing another bonus part of the project)
-        
         # Bonus points may receive up to 3 points in your MTE.
-        return -1
+        # Define a dictionary to map modifier to the corresponding getter method
+        modifier_map = {
+            "student_num": "getStudentNumber",
+            "fname": "getFName",
+            "lname": "getLName",
+            "occupation": "getOccupation",
+            "gender": "getGender",
+            "cc": "getNumericCountryCode",
+            "area": "getAreaCode",
+            "number": "getContactNumber",
+            "full_name": "getFullName",
+            "full_contact_number": "getFullContactNumber"
+        }
+
+        # Check if the modifier is valid
+        if modifier not in modifier_map:
+            print(f"Invalid modifier: {modifier}")
+            return -1
+
+        # Get the values to compare
+        value1 = getattr(c1, modifier_map[modifier])()
+        value2 = getattr(c2, modifier_map[modifier])()
+
+        # Compare the values
+        if isinstance(value1, str):
+            # Compare strings in a case-insensitive manner
+            value1 = value1.lower()
+            value2 = value2.lower()
+
+        if value1 > value2:
+            return 1
+        elif value1 == value2:
+            return 0
+        else:
+            return -1
         
     def __str__(self) -> str:
         """Returns a string representation of this contact."""
