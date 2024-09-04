@@ -67,15 +67,30 @@ def receiveContactInfo() -> Contact:
     Returns:
        Contact: Contact object created based from data.
     """
-    stdn = prompt("Enter student number: ")    
-    lname = prompt("Enter surname: ")
-    fname = prompt("Enter first name: ")
-    occupation = prompt("Enter occupation: ")
-    gender = prompt("Enter gender (M for male, F for female): ")
-    cc = int(prompt("Enter country code: "))
-    area = int(prompt("Enter area code: "))
-    number = int(prompt("Enter number: "))
-    return Contact(stdn,fname,lname,occupation,gender,cc,area,number)
+    while True:
+        try:
+            stdn = prompt("Enter student number: ")    
+            lname = prompt("Enter surname: ")
+            fname = prompt("Enter first name: ")
+            occupation = prompt("Enter occupation: ")
+            gender = prompt("Enter gender (M for male, F for female): ")
+            if gender.upper() not in ['M', 'F']:
+                print("Invalid gender. Please enter M for male or F for female.")
+                continue
+            showMenu("cc", 4)
+            cc_choice = int(prompt("Enter country code choice: "))
+            cc = convertChoices([cc_choice])[0]
+            area = int(prompt("Enter area code: "))
+            number = int(prompt("Enter number: "))
+            return Contact(stdn, fname, lname, occupation, gender, cc, area, number)
+        except ValueError:
+            print("Invalid input. Please enter a valid value.")
+        """        
+        cc = int(prompt("Enter country code: "))
+        area = int(prompt("Enter area code: "))
+        number = int(prompt("Enter number: "))
+        return Contact(stdn,fname,lname,occupation,gender,cc,area,number)
+        """
 
 def prompt(phrase: str) -> str:
     """Prompts an input to the user
@@ -86,8 +101,16 @@ def prompt(phrase: str) -> str:
     Returns:
         str : Returns a string type of inputted value.
     """
+    """
     return input(phrase)
+    """
 
+    while True:
+        user_input = input(phrase)
+        if user_input.strip() != "":  # Check if the input is not empty
+            return user_input
+        else:
+            print("Invalid input. Please enter a valid value.")
 def convertChoices(choices: list) -> list:
     """Converts choices from the phonebook menu
     into proper country code value for accuracy purposes.
@@ -101,27 +124,27 @@ def convertChoices(choices: list) -> list:
     for i in range(0, len(choices)):
         match choices[i]:
             case 1:
-                choices[i] = 856
+                choices[i] = 856 #Burma
             case 2:
-                choices[i] = 855
+                choices[i] = 855 #Cambodia
             case 3:
-                choices[i] = 66
+                choices[i] = 66 #Thailand
             case 4: 
-                choices[i] = 84
+                choices[i] = 84 #Vietnam
             case 5:
-                choices[i] = 60
+                choices[i] = 60 #Malaysia
             case 6:
-                choices[i] = 63
+                choices[i] = 63 #Philipines
             case 7:
-                choices[i] = 62
+                choices[i] = 62 #Indonesia
             case 8:
-                choices[i] = 670
+                choices[i] = 670 #Timor Leste
             case 9:
-                choices[i] = 95
+                choices[i] = 95 #Laos
             case 10:
-                choices[i] = 673
+                choices[i] = 673 #Brunei
             case 11:
-                choices[i] = 65
+                choices[i] = 65 #Simgapore
     return choices
 
 if __name__ == "__main__":
@@ -129,46 +152,48 @@ if __name__ == "__main__":
     while True:
         showMenu("main")
         opt = int(input("Select Operation: "))
-        # Complete your code here
+        # Complete your code here please
         if opt == 1:        
-            pb.addContact(receiveContactInfo())
+            pass
+
         elif opt == 2:
-            showMenu("views")
-            view_opt = int(input("Select view option: "))
+            pass
+
             if view_opt == 1:
-                country = input("Enter country: ")
-                pb.viewContactsByCountry(country)
+                pass
+
             elif view_opt == 2:
-                surname = input("Enter surname: ")
-                pb.viewContactsBySurname(surname)
+                pass
+
             elif view_opt == 3:
-                pb.viewAllContacts()
+                pass
+
             elif view_opt == 4:
-                continue
-        elif opt == 3:
-            showMenu("views")
+                pass
+        elif opt == 3: 
             del_opt = int(input("Select delete option: "))
             if del_opt == 1:
-                country = input("Enter country: ")
-                pb.deleteContactsByCountry(country)
+                pass
+
             elif del_opt == 2:
-                surname = input("Enter surname: ")
-                pb.deleteContactsBySurname(surname)
+                pass
+
             elif del_opt == 3:
-                pb.deleteAllContacts()
+                pass
+
             elif del_opt == 4:
-                continue
+                pass
         elif opt == 4:
-            showMenu("views")
             view_opt = int(input("Select view option: "))
             if view_opt == 1:
-                country = input("Enter country: ")
-                pb.viewContactsByCountry(country)
+               pass
+
             elif view_opt == 2:
-                surname = input("Enter surname: ")
-                pb.viewContactsBySurname(surname)
+                pass
+
             elif view_opt == 3:
-                pb.viewAllContacts()
+                pass
+            
             elif view_opt == 4:
                 continue
         elif opt == 5:
