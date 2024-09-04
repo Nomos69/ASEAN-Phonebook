@@ -123,7 +123,6 @@ def convertChoices(choices: list) -> list:
             case 11:
                 choices[i] = 65
     return choices
-                
 
 if __name__ == "__main__":
     pb = ContactList()
@@ -132,4 +131,45 @@ if __name__ == "__main__":
         opt = int(input("Select Operation: "))
         # Complete your code here
         if opt == 1:        
-            pb.addContact()
+            pb.addContact(receiveContactInfo())
+        elif opt == 2:
+            showMenu("views")
+            view_opt = int(input("Select view option: "))
+            if view_opt == 1:
+                country = input("Enter country: ")
+                pb.viewContactsByCountry(country)
+            elif view_opt == 2:
+                surname = input("Enter surname: ")
+                pb.viewContactsBySurname(surname)
+            elif view_opt == 3:
+                pb.viewAllContacts()
+            elif view_opt == 4:
+                continue
+        elif opt == 3:
+            showMenu("views")
+            del_opt = int(input("Select delete option: "))
+            if del_opt == 1:
+                country = input("Enter country: ")
+                pb.deleteContactsByCountry(country)
+            elif del_opt == 2:
+                surname = input("Enter surname: ")
+                pb.deleteContactsBySurname(surname)
+            elif del_opt == 3:
+                pb.deleteAllContacts()
+            elif del_opt == 4:
+                continue
+        elif opt == 4:
+            showMenu("views")
+            view_opt = int(input("Select view option: "))
+            if view_opt == 1:
+                country = input("Enter country: ")
+                pb.viewContactsByCountry(country)
+            elif view_opt == 2:
+                surname = input("Enter surname: ")
+                pb.viewContactsBySurname(surname)
+            elif view_opt == 3:
+                pb.viewAllContacts()
+            elif view_opt == 4:
+                continue
+        elif opt == 5:
+            break
