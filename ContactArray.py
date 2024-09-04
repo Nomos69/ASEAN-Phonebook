@@ -8,6 +8,10 @@ class ContactList:
     def __init__(self, size: int = 50):
         """
             Create an array list of contacts with default storage size of 50.
+            
+            Args:
+                size (int): The initial size of the contact list. Defaults to 50.
+    
         """
         self.phonebook = [None] * size
         self.size = 0
@@ -15,6 +19,9 @@ class ContactList:
     def getSize(self):
         """
             Get the size of this contact list.
+            
+            Returns:
+                int: The number of contacts in the contact list
         """
         return self.size
     
@@ -22,6 +29,9 @@ class ContactList:
         """
             Get the first contact in this contact list.
             Returns none if the list is empty.
+
+            Returns:
+                Contact: The first contact in the contact list, or None if the list is empty
         """
         # Complete this Method
         if self.isEmpty():
@@ -32,6 +42,9 @@ class ContactList:
         """
             Get the last contact in this contact list.
             Returns none if the list is empty.
+
+            Returns:
+                Contact: The last contact in the contact list, or None if the list is empty
         """
         # Complete this Method
         if self.isEmpty():
@@ -47,7 +60,7 @@ class ContactList:
             index (int): Index to get in the contact linked list.
 
         Returns:
-            Contact: Contact at index.
+            Contact: Contact at index at the specified index, or None if the index is out of range
         """
         # Complete this Method
         if index < 0 or index >= self.size:
@@ -62,7 +75,8 @@ class ContactList:
             student_num (str): Student number to base search from.
 
         Returns:
-            Contact: Contact information.
+            Contact:  Returns:
+                Contact: The contact with the specified student number, or None if not found
         """
         # Complete this Method
         for i in range(self.size):
@@ -72,6 +86,12 @@ class ContactList:
     
     def getContactBySurname(self, surname: str) -> Contact:
         """Gets the contact based on surname. Will return None if contact is not found.
+
+            Args:
+                surname (str): The surname of the contact to retrieve.
+
+            Returns:
+                Contact: The contact with the specified surname, or None if not found
         """
         # Complete this Method
         for i in range(self.size):
@@ -82,6 +102,9 @@ class ContactList:
     def isEmpty(self) -> bool:
         """
             Checks if contact list has no contacts.
+
+            Returns:
+                bool: True if the contact list is empty, False otherwise
         """
         return self.getSize() == 0
     
@@ -223,6 +246,11 @@ class ContactList:
             if f is None or contact.country_code in f:
                 s += str(contact) + "\n"
         else:
-            s += "\nThis phonebook is currently empty..."
+             """
+            If the contact list is empty, this else statement will be executed.
+            It will append a message to the string `s` indicating that the phonebook is currently empty.
+            This message will be returned as part of the string representation of the contact list.
+            """
+        s += "\nThis phonebook is currently empty..."
         s += "\n<----End---->"
         return s
