@@ -171,6 +171,20 @@ if __name__ == "__main__":
             elif edit_opt == 4:
                 stdn = prompt("Enter student number to edit: ")
                 pb.editContact(stdn, "Occupation", prompt("Enter new occupation: ")) # Edit Student's Occupation
+            elif edit_opt == 5:
+                stdn = prompt("Enter student number to edit: ")
+                showMenu("cc", 4)
+                cc_choice = int(prompt("Enter country code choice: "))
+                cc = convertChoices([cc_choice])[0]
+                pb.editContact(stdn, "Country Code", cc)
+            elif edit_opt == 6:
+                stdn = prompt("Enter student number to edit: ")
+                pb.editContact(stdn, "Area Code", int(prompt("Enter new area code: ")))
+            elif edit_opt == 7:
+                stdn = prompt("Enter student number to edit: ")
+                pb.editContact(stdn, "Phone Number", int(prompt("Enter new phone number: ")))
+            elif edit_opt == 8:
+                continue
 
         elif opt == 3: # Delete Option 
             showMenu("views")
