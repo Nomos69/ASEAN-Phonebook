@@ -170,10 +170,14 @@ if __name__ == "__main__":
 
             elif view_opt == 4:
                 pass
-        elif opt == 3: 
+        elif opt == 3: # Delete Option 
+            showMenu("views")
             del_opt = int(input("Select delete option: "))
             if del_opt == 1:
-                pass
+                stdn = prompt("Enter student number to delete: ")
+                pb.deleteContact(stdn)
+                print("Contact deleted successfully!")
+                
 
             elif del_opt == 2:
                 pass
