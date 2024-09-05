@@ -153,8 +153,10 @@ if __name__ == "__main__":
         showMenu("main")
         opt = int(input("Select Operation: "))
         # Complete your code here please
-        if opt == 1:        
-            pass
+        if opt == 1: 
+            contact = receiveContactInfo()
+            pb.addContact(contact) # Add Contact to the pb
+            print("Contact added successfully!")
 
         elif opt == 2: # Edit Option
             showMenu("edit")
