@@ -180,7 +180,9 @@ if __name__ == "__main__":
                 
 
             elif del_opt == 2:
-                pass
+                lname = prompt("Enter surname to delete: ")
+                pb.deleteContactBySurname(lname)
+                print("Contacts deleted successfully!")
 
             elif del_opt == 3:
                 pass
