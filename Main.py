@@ -144,7 +144,7 @@ def convertChoices(choices: list) -> list:
             case 10:
                 choices[i] = 673 #Brunei
             case 11:
-                choices[i] = 65 #Simgapore
+                choices[i] = 65 #Singapore
     return choices
 
 if __name__ == "__main__":
