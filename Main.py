@@ -173,19 +173,21 @@ if __name__ == "__main__":
         elif opt == 3: # Delete Option 
             showMenu("views")
             del_opt = int(input("Select delete option: "))
-            if del_opt == 1:
+            if del_opt == 1: # Delete by Student Number
                 stdn = prompt("Enter student number to delete: ")
                 pb.deleteContact(stdn)
                 print("Contact deleted successfully!")
                 
 
-            elif del_opt == 2:
+            elif del_opt == 2: # Delete by Surname
                 lname = prompt("Enter surname to delete: ")
                 pb.deleteContactBySurname(lname)
                 print("Contacts deleted successfully!")
 
-            elif del_opt == 3:
-                pass
+            elif del_opt == 3: # Delete by Country
+                country = prompt("Enter country to delete: ")
+                pb.deleteContactByCountry(country)
+                print("Contacts deleted successfully!")
 
             elif del_opt == 4:
                 pass
