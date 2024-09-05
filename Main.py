@@ -156,20 +156,22 @@ if __name__ == "__main__":
         if opt == 1:        
             pass
 
-        elif opt == 2:
-            pass
+        elif opt == 2: # Edit Option
+            showMenu("edit")
+            edit_opt = int(input("Select edit option: "))
+            if edit_opt == 1:
+                stdn = prompt("Enter student number to edit: ")
+                pb.editContact(stdn, "Student Number", prompt("Enter new student number: ")) # Edit Student Number
+            elif edit_opt == 2:
+                stdn = prompt("Enter student number to edit: ")
+                pb.editContact(stdn, "Surname", prompt("Enter new surname: ")) # Edit Student's Surname
+            elif edit_opt == 3:
+                stdn = prompt("Enter student number to edit: ")
+                pb.editContact(stdn, "Gender", prompt("Enter new gender (M for male, F for female): ")) # Edit Student's Gender
+            elif edit_opt == 4:
+                stdn = prompt("Enter student number to edit: ")
+                pb.editContact(stdn, "Occupation", prompt("Enter new occupation: ")) # Edit Student's Occupation
 
-            if view_opt == 1:
-                pass
-
-            elif view_opt == 2:
-                pass
-
-            elif view_opt == 3:
-                pass
-
-            elif view_opt == 4:
-                pass
         elif opt == 3: # Delete Option 
             showMenu("views")
             del_opt = int(input("Select delete option: "))
