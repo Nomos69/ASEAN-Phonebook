@@ -209,10 +209,12 @@ if __name__ == "__main__":
 
             elif del_opt == 4:
                 pass
-        elif opt == 4:
+        elif opt == 4: #View Option
+            showMenu("views")
             view_opt = int(input("Select view option: "))
-            if view_opt == 1:
-               pass
+            if view_opt == 1: # View by Country
+                country = prompt("Enter country to view: ")
+                pb.viewContactsByCountry(country)
 
             elif view_opt == 2:
                 pass
