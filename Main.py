@@ -216,11 +216,12 @@ if __name__ == "__main__":
                 country = prompt("Enter country to view: ")
                 pb.viewContactsByCountry(country)
 
-            elif view_opt == 2:
-                pass
+            elif view_opt == 2: # View by Surname
+                 lname = prompt("Enter surname to view: ")
+                 pb.viewContactsBySurname(lname)
 
-            elif view_opt == 3:
-                pass
+            elif view_opt == 3: #View all Contacts
+                 pb.viewAllContacts()
             
             elif view_opt == 4:
                 continue
