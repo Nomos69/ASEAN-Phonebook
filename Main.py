@@ -60,7 +60,7 @@ def showMenu(target: str, inline :int = None):
         if i != None:
             i = 1 if i == inline else i + 1
         
-def receiveContactInfo() -> Contact:
+def receiveContactInfo(pb: ContactList) -> None:
     """Cast several prompts for user to input about the
     contact's data.
 
@@ -83,7 +83,7 @@ def receiveContactInfo() -> Contact:
             area = int(prompt("Enter area code: "))
             number = int(prompt("Enter number: "))
             contact = Contact(stdn, fname, lname, occupation, gender, cc, area, number)
-            pb.contacts.append(contact)  # Add contact to the ContactList
+            pb.insert(contact)  # Insert contact into the phonebook
             print("Contact added successfully!")
             return
         except ValueError:

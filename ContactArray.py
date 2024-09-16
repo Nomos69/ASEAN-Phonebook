@@ -15,6 +15,8 @@ class ContactList:
         """
         self.phonebook = [None] * size
         self.size = 0
+        self.getContact = []
+        
 
     def getSize(self):
         """
