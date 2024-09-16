@@ -15,7 +15,7 @@ class ContactList:
         """
         self.phonebook = [None] * size
         self.size = 0
-        self.getContact = []
+        self._get_contact_list = []
         
 
     def getSize(self):
@@ -81,12 +81,12 @@ class ContactList:
                 Contact: The contact with the specified student number, or None if not found
         """
         # Complete this Method
-        for i in range(self.size):
-            if self.phonebook[i].student_num == student_num:
-                return self.phonebook[i]
+        for contact in self.phonebook[:self.size]:
+            if contact.student_num == student_num:
+                return contact
         return None
     
-    def getContactBySurname(self, surname: str) -> Contact:
+    def getContactBySurname(self, surname: str) -> list:
         """Gets the contact based on surname. Will return None if contact is not found.
 
             Args:
@@ -96,10 +96,11 @@ class ContactList:
                 Contact: The contact with the specified surname, or None if not found
         """
         # Complete this Method
+        contacts = []
         for i in range(self.size):
             if self.phonebook[i].surname == surname:
-                return self.phonebook[i]
-        return None
+                contacts.append(self.phonebook[i])
+        return contacts
     
     def isEmpty(self) -> bool:
         """
@@ -133,7 +134,7 @@ class ContactList:
             new_phonebook[i] = self.phonebook[i]
         self.phonebook = new_phonebook 
 
-    def insert(self, c : Contact):
+    def insert(self, c : Contact) -> None:
         """Inserts new contact at index point.
 
         Args:
@@ -145,7 +146,10 @@ class ContactList:
         index = self.__findIndexInsertion(c)
         self.__adjustPhonebook(index, self.size, "b")
         self.phonebook[index] = c
-        self.incrSize() 
+        self.incrSize()
+        if self.size == 1:
+            self._get_contact_list = [None] * len(self.phonebook)
+        self._get_contact_list[index] = c 
 
     def __findIndexInsertion(self, c: Contact) -> int:
         """Finds the index to insert from based on contact's
@@ -195,13 +199,12 @@ class ContactList:
             Contact: Deleted contact, if found.
         """
         # Complete this Method
-        for i in range(self.size):
-            if self.phonebook[i].student_num == stdn:
-                deleted_contact = self.phonebook[i]
-                self.__adjustPhonebook(i, self.size - 1, "f")
-                self.decrSize()
-                return deleted_contact
-        return None
+        for contact in self.phonebook[:self.size]:
+            if contact.student_num == stdn:
+                self.phonebook.remove(contact)
+                print("Contact deleted successfully!")
+                return
+        print("Contact not found")
         
     def __sort(self, by: str) -> list:
         """
@@ -225,34 +228,26 @@ class ContactList:
             sorted_phonebook.sort(key=lambda x: x.student_num)
         return sorted_phonebook
         
-    def __str__(self, f = None, by: str = 'lname') -> str:
-        """
+    def __str__(self, by: str = 'lname', surname: str = None) -> str:
+        '''
         Prints every contact in this contact list.
 
         Args:
-            f (list, optional): A list that filters which contact should
-                be outputted in the list of country codes. Defaults to None.
             by (str): Condition whether to print contact on a particular order based from some attribute.
-            Note, completing the bonus functionality from this argument is optional.
+            surname (str, optional): If provided, only contacts with this surname will be printed.
 
         Returns:
             str: Every contact in this contact list in a particular order.
-        """
-        # Complete this method
+        '''
         s = "<----Phonebook---->"
         if not self.isEmpty():
-            # Complete this method.
-            # Optionally include viewing contacts in a particular order for up to 1 bonus point in your MTE.
             sorted_phonebook = self.__sort(by)
-        for contact in sorted_phonebook:
-            if f is None or contact.country_code in f:
-                s += str(contact) + "\n"
+            for contact in sorted_phonebook:
+                if surname is not None and contact.surname == surname:
+                    s += str(contact) + "\n"
+                elif surname is None:
+                    s += str(contact) + "\n"
         else:
-             """
-            If the contact list is empty, this else statement will be executed.
-            It will append a message to the string `s` indicating that the phonebook is currently empty.
-            This message will be returned as part of the string representation of the contact list.
-            """
-        s += "\nThis phonebook is currently empty..."
+            s += "\nThis phonebook is currently empty..."
         s += "\n<----End---->"
         return s

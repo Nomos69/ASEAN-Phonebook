@@ -162,69 +162,94 @@ if __name__ == "__main__":
         elif opt == 2: # Edit Option
             showMenu("edit")
             edit_opt = int(input("Select edit option: "))
-            if edit_opt == 1:
-                stdn = prompt("Enter student number to edit: ")
-                pb.editContact(stdn, "Student Number", prompt("Enter new student number: ")) # Edit Student Number
-            elif edit_opt == 2:
-                stdn = prompt("Enter student number to edit: ")
-                pb.editContact(stdn, "Surname", prompt("Enter new surname: ")) # Edit Student's Surname
-            elif edit_opt == 3:
-                stdn = prompt("Enter student number to edit: ")
-                pb.editContact(stdn, "Gender", prompt("Enter new gender (M for male, F for female): ")) # Edit Student's Gender
-            elif edit_opt == 4:
-                stdn = prompt("Enter student number to edit: ")
-                pb.editContact(stdn, "Occupation", prompt("Enter new occupation: ")) # Edit Student's Occupation
-            elif edit_opt == 5:
-                stdn = prompt("Enter student number to edit: ")
-                showMenu("cc", 4)
-                cc_choice = int(prompt("Enter country code choice: "))
-                cc = convertChoices([cc_choice])[0]
-                pb.editContact(stdn, "Country Code", cc)
-            elif edit_opt == 6:
-                stdn = prompt("Enter student number to edit: ")
-                pb.editContact(stdn, "Area Code", int(prompt("Enter new area code: ")))
-            elif edit_opt == 7:
-                stdn = prompt("Enter student number to edit: ")
-                pb.editContact(stdn, "Phone Number", int(prompt("Enter new phone number: ")))
-            elif edit_opt == 8:
-                continue
+            stdn = prompt("Enter student number to edit: ")
+            contact = pb.getContact(stdn)
+            if contact:
+                if edit_opt == 1:
+                    new_stdn = prompt("Enter new student number: ")
+                    contact.student_num = new_stdn
+                elif edit_opt == 2:
+                    new_surname = prompt("Enter new surname: ")
+                    contact.surname = new_surname
+                elif edit_opt == 3:
+                    while True:
+                        new_gender = prompt("Enter new gender (M for male, F for female): ")
+                        if new_gender.upper() in ['M', 'F']:
+                            contact.gender = new_gender
+                            break
+                        else:
+                            print("Invalid gender. Please enter M for male or F for female.")
+                elif edit_opt == 4:
+                    new_occupation = prompt("Enter new occupation: ")
+                    contact.occupation = new_occupation
+                elif edit_opt == 5:
+                    showMenu("cc", 4)
+                    while True:
+                        try:
+                            cc_choice = int(prompt("Enter country code choice: "))
+                            if cc_choice in range(1, 12):
+                                cc = convertChoices([cc_choice])[0]
+                                contact.country_code = cc
+                                break
+                            else:
+                                print("Invalid country code choice. Please choose a number between 1 and 11.")
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+                elif edit_opt == 6:
+                    while True:
+                        try:
+                            new_area_code = int(prompt("Enter new area code: "))
+                            contact.area_code = new_area_code
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+                elif edit_opt == 7:
+                    while True:
+                        try:
+                            new_phone_number = int(prompt("Enter new phone number: "))
+                            contact.phone_number = new_phone_number
+                            break
+                        except ValueError:
+                            print("Invalid input. Please enter a number.")
+                elif edit_opt == 8:
+                    continue
+                print("Contact updated successfully!")
+            else:
+                print("Contact not found")
 
-        elif opt == 3: # Delete Option 
-            showMenu("views")
-            del_opt = int(input("Select delete option: "))
-            if del_opt == 1: # Delete by Student Number
-                stdn = prompt("Enter student number to delete: ")
+        elif opt == 3: # Delete option
+            stdn = prompt("Enter student number to delete: ")
+            contact = pb.getContact(stdn)
+            if contact:
                 pb.deleteContact(stdn)
                 print("Contact deleted successfully!")
-                
+            else:
+                print("Contact not found")
 
-            elif del_opt == 2: # Delete by Surname
-                lname = prompt("Enter surname to delete: ")
-                pb.deleteContactBySurname(lname)
-                print("Contacts deleted successfully!")
-
-            elif del_opt == 3: # Delete by Country
-                country = prompt("Enter country to delete: ")
-                pb.deleteContactByCountry(country)
-                print("Contacts deleted successfully!")
-
-            elif del_opt == 4:
-                pass
+        
         elif opt == 4: #View Option
             showMenu("views")
             view_opt = int(input("Select view option: "))
             if view_opt == 1: # View by Country
                 country = prompt("Enter country to view: ")
-                pb.viewContactsByCountry(country)
-
+                contacts = pb.viewContactsByCountry(country)
+                if contacts:
+                    for contact in contacts:
+                        print(f"Student Number: {contact.student_num}, Surname: {contact.surname}, First Name: {contact.first_name}, Occupation: {contact.occupation}, Gender: {contact.gender}, Country Code: {contact.country_code}, Area Code: {contact.area_code}, Phone Number: {contact.phone_number}")
+                else:
+                    print("No contacts found for the specified country.")
             elif view_opt == 2: # View by Surname
-                 lname = prompt("Enter surname to view: ")
-                 pb.viewContactsBySurname(lname)
-
+                lname = prompt("Enter surname to view: ")
+                contacts = pb.viewContactsBySurname(lname)
+                if contacts:
+                    for contact in contacts:
+                        print(f"Student Number: {contact.student_num}, Surname: {contact.surname}, First Name: {contact.first_name}, Occupation: {contact.occupation}, Gender: {contact.gender}, Country Code: {contact.country_code}, Area Code: {contact.area_code}, Phone Number: {contact.phone_number}")
+                else:
+                    print("No contacts found for the specified surname.")
             elif view_opt == 3: #View all Contacts
-                 pb.viewAllContacts()
-            
+                print(pb)  # Call the __str__ method directly
             elif view_opt == 4:
                 continue
         elif opt == 5:
+            print("Shutting down...")
             break
