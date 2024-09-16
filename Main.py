@@ -82,7 +82,10 @@ def receiveContactInfo() -> Contact:
             cc = convertChoices([cc_choice])[0]
             area = int(prompt("Enter area code: "))
             number = int(prompt("Enter number: "))
-            return Contact(stdn, fname, lname, occupation, gender, cc, area, number)
+            contact = Contact(stdn, fname, lname, occupation, gender, cc, area, number)
+            pb.contacts.append(contact)  # Add contact to the ContactList
+            print("Contact added successfully!")
+            return
         except ValueError:
             print("Invalid input. Please enter a valid value.")
         """        
@@ -154,10 +157,8 @@ if __name__ == "__main__":
         opt = int(input("Select Operation: "))
         # Complete your code here please
         if opt == 1: 
-            contact = receiveContactInfo()
-            pb.addContact(contact) # Add Contact to the pb
+            receiveContactInfo(pb)  # Pass the ContactList instance
             print("Contact added successfully!")
-
         elif opt == 2: # Edit Option
             showMenu("edit")
             edit_opt = int(input("Select edit option: "))
